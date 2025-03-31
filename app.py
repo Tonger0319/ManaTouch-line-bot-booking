@@ -11,7 +11,8 @@ from models.user import User
 from urllib.parse import parse_qsl
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:tony89456@localhost:5432/manatouch'
+import os
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
 
 db.app=app
