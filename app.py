@@ -186,6 +186,13 @@ def send_reminders():
                 )
                 print(f"✅ 已推播提醒給 {user.display_name}")
 
+
+with app.app_context():
+    print("🚀 正在嘗試建立資料表...")
+    db.create_all()
+    print("✅ 資料表建立完成（如果尚未存在）")
+
+
 # 啟用排程器
 scheduler = BackgroundScheduler()
 scheduler.add_job(send_reminders, 'cron', hour=10)  # 每天上午 10 點執行
