@@ -1,19 +1,14 @@
-from flask import Flask, request, abort
-from future.backports.urllib.parse import parse_qs
-from urllib.parse import parse_qsl
-from events.basic import *
-from line_bot_api import *
-from extensions import db, migrate
-from models.user import User
-from events.service import *
-from models.reservation import Reservation
-from events.admin import  *
-from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta
+from apscheduler.schedulers.background import BackgroundScheduler
+from flask import Flask, request, abort
+from events.admin import *
+from events.basic import *
+from events.service import *
+from extensions import db, migrate
+from line_bot_api import *
 from models.reservation import Reservation
 from models.user import User
-from line_bot_api import configuration, ApiClient, MessagingApi, TextMessage, ReplyMessageRequest
-
+from urllib.parse import parse_qsl
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:tony89456@localhost:5432/manatouch'
@@ -40,7 +35,6 @@ def callback():
     except InvalidSignatureError:
         app.logger.info("Invalid signature. Please check your channel access token/channel secret.")
         abort(400)
-
     return 'OK'
 
 
@@ -159,8 +153,7 @@ def handle_follow(event):
 def handle_unfollow(event):
     print(event)
 
-if __name__ == "__main__":
-    app.run()
+
 
 
 def send_reminders():
