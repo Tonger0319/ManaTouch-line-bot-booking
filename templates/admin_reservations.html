@@ -8,25 +8,25 @@
 </head>
 <body class="bg-light">
     <div class="container mt-5">
-        <h2 class="mb-4">🗂 所有預約紀錄</h2>
+        <h2 class="mb-4">📋 所有預約紀錄</h2>
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
                 <tr>
-                    <th>姓名</th>
-                    <th>預約日期</th>
-                    <th>預約時間</th>
+                    <th>使用者 ID</th>
+                    <th>服務類型</th>
                     <th>服務項目</th>
+                    <th>預約時間</th>
                     <th>建立時間</th>
                 </tr>
             </thead>
             <tbody>
                 {% for r in reservations %}
                 <tr>
-                    <td>{{ r.user_name }}</td>
-                    <td>{{ r.date }}</td>
-                    <td>{{ r.time }}</td>
-                    <td>{{ r.service }}</td>
-                    <td>{{ r.created_at }}</td>
+                    <td>{{ r.user_id }}</td>
+                    <td>{{ r.booking_service_category }}</td>
+                    <td>{{ r.booking_service }}</td>
+                    <td>{{ r.booking_datetime }}</td>
+                    <td>{{ r.created_on }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
