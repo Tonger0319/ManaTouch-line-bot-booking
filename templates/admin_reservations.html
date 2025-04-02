@@ -17,6 +17,7 @@
                     <th>服務項目</th>
                     <th>預約時間</th>
                     <th>建立時間</th>
+                    <th>取消狀態</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +28,7 @@
                     <td>{{ r.booking_service }}</td>
                     <td>{{ r.booking_datetime }}</td>
                     <td>{{ r.created_on }}</td>
+                    <td>{% if r.is_canceled %}✅ 已取消{% else %}—{% endif %}</td>
                 </tr>
                 {% endfor %}
             </tbody>
