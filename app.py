@@ -201,3 +201,7 @@ scheduler.start()
 @app.route("/ping", methods=["GET"])
 def ping():
     return "pong"
+
+@app.route("/health", methods=["GET"])
+def health_check():
+    return "OK", 200
