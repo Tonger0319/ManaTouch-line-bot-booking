@@ -205,3 +205,13 @@ def ping():
 @app.route("/health", methods=["GET"])
 def health_check():
     return "OK", 200
+
+
+from flask import render_template
+from models.reservation import Reservation
+from extensions import db
+
+@app.route("/admin/reservations")
+def admin_reservations():
+    reservations = Reservation.query.order_by(Reservation.date, Reservation.time).all()
+    return render_template("admin_reservations.html", reservations=reservations)
