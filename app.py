@@ -198,3 +198,6 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(send_reminders, 'cron', hour=10)  # 每天上午 10 點執行
 scheduler.start()
 
+@app.route("/ping", methods=["GET"])
+def ping():
+    return "pong"
