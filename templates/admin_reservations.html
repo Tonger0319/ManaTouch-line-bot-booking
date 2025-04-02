@@ -12,7 +12,7 @@
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
                 <tr>
-                    <th>使用者 ID</th>
+                    <th>顧客名稱</th>
                     <th>服務類型</th>
                     <th>服務項目</th>
                     <th>預約時間</th>
@@ -23,7 +23,7 @@
             <tbody>
                 {% for r in reservations %}
                 <tr>
-                    <td>{{ r.user_id }}</td>
+                    <td>{{ r.user.display_name if r.user else '（未綁定）' }}</td>
                     <td>{{ r.booking_service_category }}</td>
                     <td>{{ r.booking_service }}</td>
                     <td>{{ r.booking_datetime }}</td>
