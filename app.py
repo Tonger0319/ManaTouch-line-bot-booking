@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from apscheduler.schedulers.background import BackgroundScheduler
-from flask import Flask, request, abort
+from flask import Flask, request, abort, render_template
 from events.admin import *
 from events.basic import *
 from events.service import *
@@ -213,5 +213,5 @@ from extensions import db
 
 @app.route("/admin/reservations")
 def admin_reservations():
-    reservations = Reservation.query.order_by(Reservation.date, Reservation.time).all()
+    reservations = Reservation.query.order_by(Reservation.booking_datetime).all()
     return render_template("admin_reservations.html", reservations=reservations)
