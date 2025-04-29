@@ -137,7 +137,7 @@ def handle_postback(event):
 
 @handler.add(FollowEvent)
 def handle_follow(event):
-    welcome_msg = """Hellow 您好，歡迎成為ManaTouch的好友!
+    welcome_msg = """Hello 您好，歡迎成為ManaTouch的好友!
 我是ManaTouch 的小幫手
 
 -想預約夏威夷按摩LomiLomi都可以直接跟我互動喔~
@@ -213,5 +213,6 @@ from extensions import db
 
 @app.route("/admin/reservations")
 def admin_reservations():
-    reservations = Reservation.query.order_by(Reservation.booking_datetime).all()
+    reservations = Reservation.query.filter_by(is_canceled=False)\
+                    .order_by(Reservation.booking_datetime).all()
     return render_template("admin_reservations.html", reservations=reservations)
