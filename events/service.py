@@ -208,7 +208,7 @@ def is_booked(user, booking_datetime):
 
     reservation = Reservation.query.filter(
         Reservation.user_id == user.id,
-        Reservation.is_canceled.is_(False),
+        Reservation.is_cancelled.is_(False),
         Reservation.booking_datetime == booking_datetime
     ).first()
 
@@ -419,10 +419,10 @@ def service_cancel_event(event):
 
     user = User.query.filter(User.line_id == event.source.user_id).first()
     reservation = Reservation.query.filter(Reservation.user_id == user.id,
-                                           Reservation.is_canceled.is_(False),
+                                           Reservation.is_cancelled.is_(False),
                                            Reservation.booking_datetime > datetime.datetime.now()).first()
     if reservation:
-        reservation.is_canceled = True
+        reservation.is_cancelled = True
 
         db.session.add(reservation)
         db.session.commit()
@@ -454,7 +454,7 @@ def my_reservation_event(event):
 
     reservations = Reservation.query.filter(
         Reservation.user_id == user.id,
-        Reservation.is_canceled.is_(False),
+        Reservation.is_cancelled.is_(False),
         Reservation.booking_datetime > datetime.datetime.now()
     ).order_by(Reservation.booking_datetime.asc()).all()
 

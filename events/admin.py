@@ -5,7 +5,7 @@ import datetime
 
 
 def list_reservation_event(event):
-    reservations = Reservation.query.filter(Reservation.is_canceled.is_(False),
+    reservations = Reservation.query.filter(Reservation.is_cancelled.is_(False),
                                             Reservation.booking_datetime > datetime.datetime.now(),
                                             ).order_by(Reservation.booking_datetime.asc()).all()
 

@@ -1,6 +1,9 @@
 from datetime import datetime, timedelta
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask, request, abort, render_template
+from dotenv import load_dotenv
+from pathlib import Path
+load_dotenv(dotenv_path=Path(".") / ".env")
 from events.admin import *
 from events.basic import *
 from events.service import *
@@ -9,6 +12,7 @@ from line_bot_api import *
 from models.reservation import Reservation
 from models.user import User
 from urllib.parse import parse_qsl
+
 
 app = Flask(__name__)
 import os
@@ -169,7 +173,7 @@ def send_reminders():
     reservations = Reservation.query.filter(
         Reservation.booking_datetime >= start_time,
         Reservation.booking_datetime < end_time,
-        Reservation.is_canceled.is_(False)
+        Reservation.is_cancelled.is_(False)
     ).all()
 
     with ApiClient(configuration) as api_client:
@@ -213,6 +217,6 @@ from extensions import db
 
 @app.route("/admin/reservations")
 def admin_reservations():
-    reservations = Reservation.query.filter_by(is_canceled=False)\
+    reservations = Reservation.query.filter_by(is_cancelled=False)\
                     .order_by(Reservation.booking_datetime).all()
     return render_template("admin_reservations.html", reservations=reservations)
